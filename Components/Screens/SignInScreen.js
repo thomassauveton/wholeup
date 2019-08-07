@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text,ImageBackground} from 'react-native';
-import {Button, FormLabel, FormInput,Divider} from 'react-native-elements';
+import {Button, FormLabel, FormInput,Divider,FormValidationMessage} from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import url from '../../config';
 
@@ -45,16 +46,19 @@ export default class SignInScreen extends React.Component {
       <View style={{flex:1, justifyContent:"center", alignItems:"center"}}>
 
         <FormLabel>Email</FormLabel>
-        <FormInput onChangeText={(e) => this.setState({email: e})}/>
+        <FormInput onChangeText={(value) => this.setState({email: value})}
+          leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
+        />
+       
 
         <FormLabel>Password</FormLabel>
-        <FormInput onChangeText={(e) => this.setState({password: e})}/>
+        <FormInput onChangeText={(value) => this.setState({password: value})}/>
 
         <Button
           style={{width:100, marginTop:20}}
           title ="Sign In"
           backgroundColor="#473080"
-          borderRadius='10'
+        
           onPress={this.handleSumbit}
         />
 <Divider style={{height:100}}/>

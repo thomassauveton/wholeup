@@ -1,8 +1,9 @@
 import React from 'react';
 import {View, ScrollView, StyleSheet } from 'react-native';
-import {Avatar, Text,  List, ListItem } from 'react-native-elements'
+import {Avatar, Text,  List, ListItem } from 'react-native-elements';
+import {connect} from 'react-redux';
 
-export default class LinksScreen extends React.Component {
+class SearchScreen extends React.Component {
 
  render() {
 
@@ -25,6 +26,8 @@ export default class LinksScreen extends React.Component {
              rounded
              title={user.title}
              overlayContainerStyle={{backgroundColor: '#16a085'}}
+            //  écoute du signal “Press” associée à la fonction handleContact reçue en propriété auquel on add 4 Arguments
+            onPress={() => this.props.handleContact(user.name, user.firstName, user.email, user.company)}
            />
          }
          title={user.name}
@@ -56,87 +59,48 @@ export default class LinksScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
- container: {
-   flex: 1,
-   paddingTop: 15,
-   backgroundColor: '#fff',
- },
- subtitle:{
-   flexDirection:'row',
-   padding:10,
-   paddingTop:5,
- },
- ratingText:{
-   color: 'grey',
+  container: {
+    flex: 1,
+    paddingTop: 15,
+    backgroundColor: '#fff',
+  },
+  subtitle:{
+    flexDirection:'row',
+    padding:10,
+    paddingTop:5,
+  },
+  ratingText:{
+    color: 'grey',
+  }
+ });
+
+// Creation du composant conteneur qui sera autour du composant LinkScreen 
+
+function mapDispatchToProps(dispatch) {
+ return {
+   //parametrage du de l'action mapDispatchToProps qui a pour param la fction 'handleContact' qui envoie une action 'addcontact'
+  handleContact: function( nameContact, firstNameContact, emailContact, companyNameContact)
+    
+   { 
+    //  instruction permettant l'exe de l'action vers redux
+    dispatch( {
+      type: 'addcontact',
+      name: nameContact,
+      firstName: firstNameContact,
+      email:emailContact,
+      companyName:companyNameContact
+  } ) 
+  }
  }
-});
+}
+
+export default connect(
+  null, 
+  mapDispatchToProps
+)(SearchScreen);
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-// <ListItem
-//   avatar={
-//   <Avatar
-//     small
-//     rounded
-//     title="EC"
-//     overlayContainerStyle={{backgroundColor: '#e67e22'}}/>}
-//   title="Emilie Carpenter"
-//   key="0"
-//   subtitle={
-//     <View style={styles.subtitle}>
-//       <Text style={styles.ratingText}>contact@gmail.com</Text>
-//       <Text style={styles.ratingText}>company: Deckow-Crist</Text>
-//     </View>
-//   }
-//   >
-// </ListItem>
-// <ListItem
-//    key="1"
-//    avatar={
-//      <Avatar
-//        small
-//        rounded
-//        title="JD"
-//        overlayContainerStyle={{backgroundColor: '#3498db'}}
-//      />
-//    }
-//    title="John Doe"
-//    subtitle={
-//      <View style={styles.subtitle}>
-//        <Text style={styles.ratingText}>contact@gmail.com</Text>
-//        <Text style={styles.ratingText}> company: Deckow-Crist</Text>
-//      </View>
-//    }
-//  />
-//
-<ListItem
-  key="2"
-  avatar={
-    <Avatar
-      small
-      rounded
-      title="EC"
-      overlayContainerStyle={{backgroundColor: '#16a085'}}
-    />
-  }
-  title="Noel Paganelli"
-  subtitle={
-    <View style={styles.subtitle}>
-      <Text style={styles.ratingText}>contact@gmail.com</Text>
-      <Text style={styles.ratingText}> company: Deckow-Crist</Text>
-    </View>
-  }
-/>

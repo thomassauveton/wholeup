@@ -42,8 +42,10 @@ export default class SignUpScreen extends React.Component {
       headers: {'Content-Type': 'application/json'},
       body: signupData
     }
+    // reception de la reponse brute & converti au format Json
     ).then(function(res, err){
       return res.json()
+      // reponse de navigation vers la page account 
     }).then(function(data){
       console.log(data);
       ctx.props.navigation.navigate('Account');
@@ -59,16 +61,16 @@ export default class SignUpScreen extends React.Component {
         <FormLabel>First Name</FormLabel>
        <FormInput
        //pkoi met on "e" ? 
-          onChangeText={(e) => this.setState({firstName: e})}/>
+          onChangeText={(value) => this.setState({firstName: value})}/>
         <FormLabel>Last Name</FormLabel>
         <FormInput
-          onChangeText={(e) => this.setState({lastName: e})}/>
+          onChangeText={(value) => this.setState({lastName: value})}/>
         <FormLabel>Email</FormLabel>
         <FormInput
-          onChangeText={(e) => this.setState({email: e})}/>
+          onChangeText={(value) => this.setState({email: value})}/>
         <FormLabel>Password</FormLabel>
         <FormInput
-          onChangeText={(e) => this.setState({password: e})}/>
+          onChangeText={(value) => this.setState({password: value})}/>
 
         <Button
           style={{width:100, marginTop:20}}
